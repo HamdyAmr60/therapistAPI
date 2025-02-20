@@ -1,8 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using therapist.API.projectConfigrations.Databases;
+using Therapist.Reposatories.Data.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.identityConniction();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
