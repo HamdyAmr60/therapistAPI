@@ -8,11 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.identityConniction();
+builder.appDatabase();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
-
+using var Scope = app.Services.CreateScope();
+var Services = Scope.ServiceProvider;
+await migrationServices.MigrationService(Services,app);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
