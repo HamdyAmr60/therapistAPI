@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis;
 using Therapist.Core;
 using Therapist.Core.Models.Identity;
 using Therapist.Core.Services;
@@ -16,6 +17,12 @@ namespace therapist.API.projectConfigrations
         {
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
            builder.Services.AddScoped<ITokenService, TokenService>();
+            builder.Services.AddSingleton<IConnectionMultiplexer>(options =>
+            {
+                var connect = builder.Configuration.GetConnectionString("redis");
+                return ConnectionMultiplexer.Connect(connect);
+            });
+            builder.Services.AddSingleton<ICacheService, CacheService>();
           builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<IdentityDbContext>();
             builder.Services.AddAuthentication(Options =>
             {
