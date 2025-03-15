@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -19,8 +20,6 @@ namespace Therapist.Core.Models
 
         public string UserId { get; set; }
 
-        [ForeignKey("UserId")]
-        public virtual AppUser User { get; set; }
 
     }
 }

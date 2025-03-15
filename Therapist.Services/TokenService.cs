@@ -29,6 +29,8 @@ namespace Therapist.Services
                 new Claim(ClaimTypes.GivenName , user.UserName),
                 new Claim(ClaimTypes.Email , user.Email),
                 new Claim(ClaimTypes.Name , user.DisName),
+               new Claim(ClaimTypes.NameIdentifier, user.Id),
+
             };
 
             var UserRoles = await userManager.GetRolesAsync(user);

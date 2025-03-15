@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
+using therapist.API.Helpers;
 using Therapist.Core;
 using Therapist.Core.Models.Identity;
 using Therapist.Core.Services;
@@ -42,6 +44,8 @@ namespace therapist.API.projectConfigrations
                         IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
                     };
                 });
+
+            builder.Services.AddAutoMapper(M=>M.AddProfile(typeof(MappingProfiles)));
             return builder;
         }
     }
